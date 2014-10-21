@@ -2,16 +2,34 @@
 
 ## setup
 
-Install keybase locally https://keybase.io/docs/command_line/installation
+### Install GPG
 
-Note: If you already have a secret key installed with gpg on your system, make sure the one you're using for this application is password-less. This will be fixed eventually but it'll be annoying for the time being.
+For OSX
 
-After installing keybase locally, run:
+    brew install gnupg2 gpg-agent
 
+For Linux
+
+    sudo apt-get install gnupg2
+
+### Install keybase
+
+    npm install -g keybase-installer
+    keybase-installer
     keybase login
     keybase pull
 
-Then set up the local server:
+### If there is a password on your GPG secret ...
+
+For OSX
+
+Follow these instructions http://sudoers.org/2013/11/05/gpg-agent.html
+
+For Linux
+
+This prompts and remembers the changes. If you don't get this, please send a pull request to this file with changes.
+
+### Then set up the local server:
 
     npm install
     cp local.json-dist local.json
