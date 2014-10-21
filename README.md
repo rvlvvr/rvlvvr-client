@@ -19,6 +19,10 @@ For Linux
     keybase login
     keybase pull
 
+### Tracking users on keybase
+
+If you change your keys or the person you are tracking changes their keys, you will have to re-track each other. Anytime you track someone on the keybase.io website, you will have to run `keybase pull` to update locally.
+
 ### If there is a password on your GPG secret ...
 
 For OSX
