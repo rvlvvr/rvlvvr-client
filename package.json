@@ -21,7 +21,8 @@
     "webremix": "~1.0.0",
     "jquery": "~2.1.1",
     "meatspace-publico": "~1.0.1",
-    "moment": "~2.8.3"
+    "node-keybase": "0.0.5",
+    "openpgp": "^0.8.1"
   },
   "devDependencies": {
     "gulp": "^3.8.7",

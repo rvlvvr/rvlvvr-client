@@ -72,6 +72,11 @@ server.start(function () {
     return;
   }
 
+  if (nconf.get('passphrase').indexOf('<') > -1) {
+    throw new Error('Please change the `passphrase` value in local.json to your keybase passphrase');
+    return;
+  }
+
   var io = SocketIO.listen(server.listener);
 
   io.on('connection', function (socket) {
