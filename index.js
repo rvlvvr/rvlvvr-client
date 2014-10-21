@@ -72,6 +72,11 @@ server.start(function () {
     return;
   }
 
+  if (nconf.get('passphrase').indexOf('<') > -1) {
+    throw new Error('Please change the `passphrase` value in local.json to your keybase passphrase');
+    return;
+  }
+
   setTimeout(function () {
     console.log('Server started: visit http://' + nconf.get('domain') + ':'
       + nconf.get('port') + ' in your browser');
