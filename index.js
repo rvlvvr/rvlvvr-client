@@ -72,6 +72,11 @@ server.start(function () {
     return;
   }
 
+  setTimeout(function () {
+    console.log('Server started: visit http://' + nconf.get('domain') + ':'
+      + nconf.get('port') + ' in your browser');
+  }, 5000);
+
   var io = SocketIO.listen(server.listener);
 
   io.on('connection', function (socket) {
