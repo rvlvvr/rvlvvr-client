@@ -116,7 +116,7 @@ localSocket.on('local', function (data) {
 
 socket.on('message', function (data) {
   if (feed.find('li[data-created="' + data.created + '"]').length === 0) {
-    console.log('listening to incoming data ', data)
+   // console.log('listening to incoming data ', data)
     if (data.public) {
       r.render(data);
     } else {
