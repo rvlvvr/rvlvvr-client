@@ -124,8 +124,7 @@ localSocket.on('local', function (data) {
 });
 
 socket.on('notifications', function (data) {
-  if (data) {
-    console.log('got notification');
+  if (data && currentReceiver !== data) {
     usersEl.find('p[data-user="' + data + '"] .notification').fadeIn();
   }
 });
