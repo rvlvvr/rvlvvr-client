@@ -53,6 +53,25 @@ section, footer, header {
   width: 100%;
 }
 
+.blocker {
+  position: absolute;
+  display: none;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.8);
+  z-index: 2;
+}
+
+.blocker p {
+  color: #111;
+  font-size: 3rem;
+  font-weight: 300;
+  text-align: center;
+  line-height: 6.5rem;
+}
+
 .subheader {
   background-color: rgba(255, 255, 255, 0.8);
   border-left: 5px solid #111;
@@ -161,8 +180,10 @@ section#messages h1 {
 
 #new {
   display: none;
-  padding: 53px 15px 5px 15px;
-  width: 90%;
+  padding: 10px 15px 5px 15px;
+  width: 100%;
+  position: relative;
+  margin-top: 45px;
 }
 
 #new textarea {

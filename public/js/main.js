@@ -17,6 +17,7 @@ var subheader = $('.subheader');
 var users = [];
 var avatars = {};
 var currentReceiver = '';
+var blocker = $('.blocker');
 
 var socket = io(body.data('server'));
 var localSocket = io();
@@ -87,10 +88,15 @@ search.on('keyup', function (ev) {
 
 newMsg.on('submit', function (ev) {
   ev.preventDefault();
+
   var keyName = [me, currentReceiver].sort().join('-');
   var isPublic = false;
   if ($('input[name="public"]').is(':checked')) {
     isPublic = true;
+  }
+
+  if (!isPublic) {
+    blocker.fadeIn();
   }
 
   $('.empty').remove();
@@ -115,6 +121,7 @@ localSocket.on('local', function (data) {
 });
 
 socket.on('message', function (data) {
+  blocker.fadeOut();
   if (feed.find('li[data-created="' + data.created + '"]').length === 0) {
    // console.log('listening to incoming data ', data)
     if (data.public) {
