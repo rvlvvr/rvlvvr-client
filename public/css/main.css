@@ -220,21 +220,16 @@ section#messages h1 {
   float: left;
 }
 
-#feed li.private small {
-  border-radius: 100px;
+#feed li.private .lock {
   background-color: #fff;
   color: #777;
-  opacity: 0.65;
-  width: 20px;
-  height: 20px;
-  text-align: center;
-  font-size: 0.8rem;
-  line-height: 1.3rem;
-  font-weight: 500;
+  opacity: 0.4;
+  width: 24px;
+  height: 24px;
   z-index: 2;
   position: absolute;
   right: 2px;
-  top: 2px;
+  top: 22px;
 }
 
 #feed li .para {

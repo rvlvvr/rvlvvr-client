@@ -23,7 +23,7 @@ exports.render = function (data) {
     var small;
 
     if (isPublic === 'private') {
-      small = $('<small>P</small>');
+      small = $('<img class="lock" src="/images/lock.svg">');
       senderAvatar.append(small);
     }
 
