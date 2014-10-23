@@ -11,12 +11,17 @@ var sortItems = function (a, b) {
 
 exports.render = function (data) {
   if (feed.find('li[data-created="' + data.created + '"]').length === 0) {
-    var isPublic = data.public ? 'public' : 'private';
+    var isPublic = 'public';
+
+    if (data.public.toString() === 'false') {
+      isPublic = 'private';
+    }
+
     var li = $('<li data-created="' + data.created + '" class="' + isPublic + '"><div class="avatars"></div></li>');
     var senderAvatar = $('<div><img src="' + data.senderAvatar + '"></img></div>');
     var div = $('<div class="para"></div>');
 
-    if (!data.public) {
+    if (isPublic === 'private') {
       if (data.text.indexOf('-----BEGIN PGP MESSAGE-----') > -1) {
         var pre = $('<pre></pre>');
         pre.text(data.text);
