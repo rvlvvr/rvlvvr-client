@@ -10,7 +10,6 @@ var sortItems = function (a, b) {
 };
 
 exports.render = function (data) {
-  console.log(data)
   if (feed.find('li[data-created="' + data.created + '"]').length === 0) {
     var isPublic = 'public';
 
@@ -28,7 +27,7 @@ exports.render = function (data) {
       senderAvatar.append(small);
     }
 
-    div.append(data.html);
+    div.html(data.html);
 
     li.find('.avatars').append(senderAvatar);
 
