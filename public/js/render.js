@@ -10,6 +10,7 @@ var sortItems = function (a, b) {
 };
 
 exports.render = function (data) {
+  console.log(data)
   if (feed.find('li[data-created="' + data.created + '"]').length === 0) {
     var isPublic = 'public';
 
@@ -20,21 +21,14 @@ exports.render = function (data) {
     var li = $('<li data-created="' + data.created + '" class="' + isPublic + '"><div class="avatars"></div></li>');
     var senderAvatar = $('<div><img src="' + data.senderAvatar + '"></img></div>');
     var div = $('<div class="para"></div>');
+    var small;
 
     if (isPublic === 'private') {
-      if (data.text.indexOf('-----BEGIN PGP MESSAGE-----') > -1) {
-        var pre = $('<pre></pre>');
-        pre.text(data.text);
-        div.append(pre);
-      } else {
-        div.append(data.html);
-      }
-
-      var small = $('<small>P</small>');
+      small = $('<small>P</small>');
       senderAvatar.append(small);
-    } else {
-      div.html(data.html);
     }
+
+    div.append(data.html);
 
     li.find('.avatars').append(senderAvatar);
 
