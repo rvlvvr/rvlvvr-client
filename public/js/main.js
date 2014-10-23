@@ -22,6 +22,8 @@ var blocker = $('.blocker');
 var socket = io(body.data('server'));
 var localSocket = io();
 
+socket.emit('notifications', me);
+
 var addAvatar = function (user, p, span) {
   $.getJSON('https://keybase.io/_/api/1.0/user/lookup.json?usernames=' +
     user + '&fields=pictures', function (data) {
@@ -44,7 +46,7 @@ $.getJSON('/users', function (data) {
   users = data.users;
   users.unshift(me);
   users.forEach(function (user) {
-    var p = $('<p></p>');
+    var p = $('<p><span class="notification"></span></p>');
     var span = $('<span></span>');
     p.attr('data-user', user);
     span.text(user);
@@ -64,6 +66,7 @@ usersEl.on('click', 'p', function (ev) {
   socket.emit('dual', keyName);
   localSocket.emit('recent', user);
   info.fadeOut(function () {
+    usersEl.find('p[data-user="' + user + '"] .notification').fadeOut();
     $('#receiver-avatar').val(avatars[user]);
     self.siblings().removeClass('selected');
     self.addClass('selected');
@@ -117,6 +120,13 @@ localSocket.on('local', function (data) {
   if (feed.find('li[data-created="' + data.created + '"]').length === 0) {
     console.log('listening to incoming local data ', data)
     r.render(data);
+  }
+});
+
+socket.on('notifications', function (data) {
+  if (data) {
+    console.log('got notification');
+    usersEl.find('p[data-user="' + data + '"] .notification').fadeIn();
   }
 });
 

@@ -86,13 +86,15 @@ section, footer, header {
 
 #search {
   background-color: transparent;
-  border: 1px solid #111;
+  border-left: 0;
   border-right: 0;
+  border-top: 1px solid #111;
+  border-bottom: 1px solid #111;
   display: block;
   font-size: 1.2rem;
   clear: both;
   float: left;
-  width: 201px;
+  width: 202px;
   position: fixed;
   top: 43px;
   padding: 0 5px;
@@ -276,6 +278,50 @@ section#messages h1 {
   padding: 5px 2px;
   position: absolute;
   right: 0;
+}
+
+section#users p span.notification {
+  display: none;
+  padding: 0;
+  width: 20px;
+  height: 20px;
+  background-color: #f00;
+  border-radius: 100px;
+  position: absolute;
+  left: 4px;
+  top: 4px;
+  -webkit-animation-name: blinker;
+  -webkit-animation-duration: 1s;
+  -webkit-animation-timing-function: linear;
+  -webkit-animation-iteration-count: infinite;
+
+  -moz-animation-name: blinker;
+  -moz-animation-duration: 1s;
+  -moz-animation-timing-function: linear;
+  -moz-animation-iteration-count: infinite;
+
+  animation-name: blinker;
+  animation-duration: 1s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+@-moz-keyframes blinker {
+  0% { opacity: 1.0; }
+  50% { opacity: 0.0; }
+  100% { opacity: 1.0; }
+}
+
+@-webkit-keyframes blinker {
+  0% { opacity: 1.0; }
+  50% { opacity: 0.0; }
+  100% { opacity: 1.0; }
+}
+
+@keyframes blinker {
+  0% { opacity: 1.0; }
+  50% { opacity: 0.0; }
+  100% { opacity: 1.0; }
 }
 
 input[type="checkbox"] {
