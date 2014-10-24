@@ -85,19 +85,19 @@ section, footer, header {
 }
 
 #search {
-  background-color: transparent;
   border-left: 0;
   border-right: 0;
   border-top: 1px solid #111;
   border-bottom: 1px solid #111;
   display: block;
-  font-size: 1.2rem;
+  font-size: 1.5rem;
+  font-weight: 200;
   clear: both;
   float: left;
-  width: 202px;
+  width: 182px;
   position: fixed;
+  padding: 0 5px 0 30px;
   top: 43px;
-  padding: 0 5px;
   left: 0;
 }
 
@@ -141,25 +141,24 @@ section#users {
   position: fixed;
   bottom: 0;
   overflow: auto;
-  top: 70px;
+  top: 75px;
 }
 
 section#users p {
-  height: 100px;
-  margin-bottom: 2px;
+  border-bottom: 1px solid #111;
+  height: 32px;
   position: relative;
   overflow: hidden;
   cursor: pointer;
 }
 
 section#users p span {
-  background-color: rgba(255, 255, 255, 0.7);
   color: #111;
-  font-size: 1.7rem;
+  font-size: 1.6rem;
   line-height: 1.7rem;
   display: inline-block;
   bottom: 0;
-  left: 0;
+  left: 25px;
   position: absolute;
   padding: 2px 5px;
   z-index: 2;
@@ -200,7 +199,7 @@ section#messages h1 {
 }
 
 #new textarea, #search {
-  color: #329bec;
+  color: #0071fd;
 }
 
 #new textarea:focus, #search:focus {
@@ -289,7 +288,7 @@ section#users p span.notification {
   border-radius: 100px;
   position: absolute;
   left: 4px;
-  top: 4px;
+  top: 6px;
   -webkit-animation-name: blinker;
   -webkit-animation-duration: 1s;
   -webkit-animation-timing-function: linear;

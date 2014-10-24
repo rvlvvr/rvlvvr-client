@@ -24,7 +24,7 @@ var localSocket = io();
 
 socket.emit('notifications', me);
 
-var addAvatar = function (user, p, span) {
+var addAvatar = function (user) {
   $.getJSON('https://keybase.io/_/api/1.0/user/lookup.json?usernames=' +
     user + '&fields=pictures', function (data) {
     var avatar = '/images/avatar.jpg';
@@ -34,9 +34,6 @@ var addAvatar = function (user, p, span) {
     }
 
     avatars[user] = avatar;
-    var img = $('<img></img>');
-    img.attr('src', avatar);
-    p.append(img).append(span);
   });
 };
 
@@ -50,7 +47,8 @@ $.getJSON('/users', function (data) {
     var span = $('<span></span>');
     p.attr('data-user', user);
     span.text(user);
-    addAvatar(user, p, span);
+    addAvatar(user);
+    p.append(span);
     usersEl.append(p);
   });
 });
