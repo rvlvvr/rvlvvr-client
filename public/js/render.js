@@ -37,6 +37,5 @@ exports.render = function (data) {
 
     li.append(div);
     feed.prepend(li);
-    feed.find('li').sort(sortItems).appendTo(feed);
   }
 };
