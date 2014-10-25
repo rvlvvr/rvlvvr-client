@@ -16,9 +16,10 @@ block content
       input(type='checkbox', name='public')
       span make public? (defaults to private)
       textarea(name='message', maxlength='350')
-      input(type='hidden', name='receiver', id='receiver')
-      input(type='hidden', name='senderAvatar', id='sender-avatar')
-      input(type='hidden', name='receiverAvatar', id='receiver-avatar')
+      input(type='hidden', id='receiver')
+      input(type='hidden', id='sender-avatar')
+      input(type='hidden', id='receiver-avatar')
+      input(type='hidden', id='receiver-pubkey')
       button(type='submit') send
       .blocker
         p Encrypting, please hold ...

@@ -14,23 +14,27 @@ var feed = $('#feed');
 var subheader = $('.subheader');
 var users = [];
 var avatars = {};
+var publicKeys = {};
 var currentReceiver = '';
 var blocker = $('.blocker');
+var keyName;
 
 var socket = io(body.data('server'));
 var localSocket = io();
 
 socket.emit('notifications', me);
 
-var addAvatar = function (user) {
+var addUser = function (user, p) {
   $.getJSON('https://keybase.io/_/api/1.0/user/lookup.json?usernames=' +
-    user + '&fields=pictures', function (data) {
+    user + '&fields=pictures,public_keys', function (data) {
     var avatar = '/images/avatar.jpg';
 
     if (data.them[0].pictures) {
       avatar = data.them[0].pictures.primary.url;
     }
 
+    publicKeys[user] = data.them[0].public_keys.primary.key_fingerprint;
+    p.attr('data-pubkey', publicKeys[user]);
     avatars[user] = avatar;
   });
 };
@@ -45,7 +49,7 @@ $.getJSON('/users', function (data) {
     var span = $('<span></span>');
     p.attr('data-user', user);
     span.text(user);
-    addAvatar(user);
+    addUser(user, p);
     p.append(span);
     usersEl.append(p);
   });
@@ -55,15 +59,17 @@ usersEl.on('click', 'p', function (ev) {
   feed.empty();
   var self = $(this);
   var user = $(this).data('user');
-  var keyName = [me, user].sort().join('-');
+  keyName = [me, user].sort().join('-');
+
   receiver.val(user);
   currentReceiver = user;
   socket.emit('join', keyName);
-  socket.emit('dual', keyName);
   localSocket.emit('recent', user);
+  localSocket.emit('latest-message-id', user);
   info.fadeOut(function () {
     usersEl.find('p[data-user="' + user + '"] .notification').fadeOut();
     $('#receiver-avatar').val(avatars[user]);
+    $('#receiver-pubkey').val(publicKeys[user]);
     self.siblings().removeClass('selected');
     self.addClass('selected');
     messagesEl.find('h1').text(user);
@@ -88,7 +94,6 @@ search.on('keyup', function (ev) {
 newMsg.on('submit', function (ev) {
   ev.preventDefault();
 
-  var keyName = [me, currentReceiver].sort().join('-');
   var isPublic = false;
   if ($('input[name="public"]').is(':checked')) {
     isPublic = true;
@@ -101,15 +106,19 @@ newMsg.on('submit', function (ev) {
   $('.empty').remove();
   $('#sender-avatar').val(avatars[me]);
   console.log('posting message');
-  localSocket.emit('local', JSON.stringify({
-    message: $('textarea[name="message"]').val(),
-    receiver: $('#receiver').val(),
-    senderAvatar: $('#sender-avatar').val(),
-    receiverAvatar: $('#receiver-avatar').val(),
-    public: isPublic
-  }));
+  setTimeout(function () {
+    blocker.fadeOut();
+    localSocket.emit('local', JSON.stringify({
+      text: $('textarea[name="message"]').val(),
+      receiver: $('#receiver').val(),
+      senderAvatar: $('#sender-avatar').val(),
+      receiverAvatar: $('#receiver-avatar').val(),
+      pubKey: $('#receiver-pubkey').val(),
+      public: isPublic
+    }));
 
-  newMsg.find('textarea').val('');
+    newMsg.find('textarea').val('');
+  }, 1000);
 });
 
 localSocket.on('local', function (data) {
@@ -125,19 +134,22 @@ socket.on('notifications', function (data) {
   }
 });
 
+localSocket.on('latest-message-id', function (data) {
+  console.log('emitting ', keyName, data)
+  socket.emit('dual', {
+    key: keyName,
+    start: data
+  });
+});
+
 socket.on('message', function (data) {
   blocker.fadeOut();
   if (feed.find('li[data-created="' + data.created + '"]').length === 0) {
-   // console.log('listening to incoming data ', data)
+    console.log('listening to incoming data ', data)
     if (data.public) {
       r.render(data);
     } else {
-      $.post('/decrypt', { data: data }, function (d) {
-      }).done(function (d) {
-        r.render(d.data);
-      }).fail(function () {
-        console.log('Could not decrypt', data.created);
-      });
+      localSocket.emit('decrypt', data);
     }
   }
 });

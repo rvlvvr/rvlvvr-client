@@ -40,13 +40,6 @@ var routes = [
     config: {
       handler: services.getUsers
     }
-  },
-  {
-    method: 'POST',
-    path: '/decrypt',
-    config: {
-      handler: services.decrypt
-    }
   }
 ];
 
@@ -86,9 +79,12 @@ server.start(function () {
       services.recent(data, socket);
     });
 
+    socket.on('decrypt', function (data) {
+      services.decrypt(data, socket);
+    });
+
     socket.on('local', function (data) {
       console.log('incoming local data ', data)
-
       services.addMessage(data, socket);
     });
   });
