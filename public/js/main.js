@@ -1,8 +1,6 @@
 var $ = require('jquery');
-var io = require('socket.io-client');
 var moment = require('moment');
 var r = require('./render');
-
 var body = $('body');
 var me = body.data('me');
 var usersEl = $('#users');
