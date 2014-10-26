@@ -280,15 +280,22 @@ section#messages h1 {
 }
 
 section#users p span.notification {
-  display: none;
   padding: 0;
   width: 20px;
   height: 20px;
-  background-color: #f00;
+  background-color: rgba(210, 210, 210, 0.5);
   border-radius: 100px;
   position: absolute;
   left: 4px;
   top: 6px;
+}
+
+section#users p span.notification.online {
+  background-color: #25dd6f;
+}
+
+section#users p span.notification.new {
+  background-color: #f00;
   -webkit-animation-name: blinker;
   -webkit-animation-duration: 1s;
   -webkit-animation-timing-function: linear;

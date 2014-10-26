@@ -22,7 +22,12 @@ var keyName;
 var socket = io(body.data('server'));
 var localSocket = io();
 
-socket.emit('notifications', me);
+var setOnline = function () {
+  socket.emit('notifications', {
+    user: me,
+    avatar: avatars[me]
+  });
+};
 
 var addUser = function (user, p) {
   $.getJSON('https://keybase.io/_/api/1.0/user/lookup.json?usernames=' +
@@ -36,6 +41,10 @@ var addUser = function (user, p) {
     publicKeys[user] = data.them[0].public_keys.primary.key_fingerprint;
     p.attr('data-pubkey', publicKeys[user]);
     avatars[user] = avatar;
+
+    if (user === me) {
+      setOnline();
+    }
   });
 };
 
@@ -57,6 +66,7 @@ $.getJSON('/users', function (data) {
 
 usersEl.on('click', 'p', function (ev) {
   feed.empty();
+  setOnline();
   var self = $(this);
   var user = $(this).data('user');
   keyName = [me, user].sort().join('-');
@@ -68,7 +78,7 @@ usersEl.on('click', 'p', function (ev) {
   localSocket.emit('latest-message-id', user);
 
   info.fadeOut(function () {
-    usersEl.find('p[data-user="' + user + '"] .notification').fadeOut();
+    usersEl.find('p[data-user="' + user + '"] .notification').removeClass('new');
     $('#receiver-avatar').val(avatars[user]);
     $('#receiver-pubkey').val(publicKeys[user]);
     self.siblings().removeClass('selected');
@@ -95,6 +105,8 @@ search.on('keyup', function (ev) {
 newMsg.on('submit', function (ev) {
   ev.preventDefault();
 
+  setOnline();
+
   var isPublic = false;
   if ($('input[name="public"]').is(':checked')) {
     isPublic = true;
@@ -119,7 +131,7 @@ newMsg.on('submit', function (ev) {
     }));
 
     newMsg.find('textarea').val('');
-  }, 1000);
+  }, 500);
 });
 
 localSocket.on('local', function (data) {
@@ -131,12 +143,18 @@ localSocket.on('local', function (data) {
 
 socket.on('notifications', function (data) {
   if (data && currentReceiver !== data) {
-    usersEl.find('p[data-user="' + data + '"] .notification').fadeIn();
+    usersEl.find('p[data-user="' + data + '"] .notification').addClass('new');
+  }
+});
+
+socket.on('online', function (data) {
+  if (users.indexOf(data.user) > -1) {
+    console.log('user is online ', data.user);
+    usersEl.find('p[data-user="' + data.user + '"] .notification').addClass('online');
   }
 });
 
 localSocket.on('latest-message-id', function (data) {
-  console.log('emitting ', keyName, data)
   socket.emit('dual', {
     key: keyName,
     start: data
