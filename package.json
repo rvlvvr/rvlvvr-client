@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "browserify": "^5.9.3",
-    "hapi": "~6.4.0",
+    "hapi": "~7.1.1",
     "jade": "~1.5.0",
     "moment": "^2.8.3",
     "nconf": "~0.6.9",
