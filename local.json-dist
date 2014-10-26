@@ -2,6 +2,7 @@
     "domain": "localhost",
     "port": 3000,
     "me": "<keybase username>",
+    "alwaysTrust": false,
     "incomingServer": "ws://rvlvvr.net:80",
     "outgoingServers": ["ws://rvlvvr.net:80"]
 }

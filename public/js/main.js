@@ -66,6 +66,7 @@ usersEl.on('click', 'p', function (ev) {
   socket.emit('join', keyName);
   localSocket.emit('recent', user);
   localSocket.emit('latest-message-id', user);
+
   info.fadeOut(function () {
     usersEl.find('p[data-user="' + user + '"] .notification').fadeOut();
     $('#receiver-avatar').val(avatars[user]);
