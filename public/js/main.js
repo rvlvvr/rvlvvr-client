@@ -160,7 +160,8 @@ localSocket.on('local', function (data) {
 
 socket.on('notifications', function (data) {
   if (data && currentReceiver !== data) {
-    usersEl.find('p[data-user="' + data + '"] .notification').addClass('new');
+    usersEl.find('p[data-user="' + data + '"] .notification')
+           .removeClass('idle').removeClass('active').addClass('new');
   }
 });
 
