@@ -27,7 +27,7 @@ If you change your keys or the person you are tracking changes their keys, you w
 
 For OSX
 
-Follow these instructions http://sudoers.org/2013/11/05/gpg-agent.html
+Install https://gpgtools.org
 
 For Linux
 

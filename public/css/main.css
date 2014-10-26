@@ -279,6 +279,44 @@ section#messages h1 {
   right: 0;
 }
 
+#error {
+  opacity: 0.95;
+  display: none;
+  position: fixed;
+  left: 217px;
+  top: 43px;
+  right: 0;
+  background-color: #ef4c4c;
+  color: #fff;
+  font-weight: 300;
+  cursor: pointer;
+  font-size: 1rem;
+  line-height: 1.2rem;
+}
+
+#error:hover {
+  opacity: 1.0;
+}
+
+#error h2 {
+  font-size: 2rem;
+  padding: 5px 10px;
+  line-height: 2.2rem;
+}
+
+#error span {
+  display: block;
+  padding: 10px;
+}
+
+#error p {
+  background-color: #e8506d;
+  border-top: 1px solid #d83c59;
+  margin-top: 10px;
+  padding-top: 10px;
+  padding: 10px;
+}
+
 section#users p span.notification {
   padding: 0;
   width: 20px;
@@ -290,7 +328,11 @@ section#users p span.notification {
   top: 6px;
 }
 
-section#users p span.notification.online {
+section#users p span.notification.idle {
+  background-color: #fff441;
+}
+
+section#users p span.notification.active {
   background-color: #25dd6f;
 }
 

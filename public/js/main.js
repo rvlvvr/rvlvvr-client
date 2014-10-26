@@ -17,17 +17,30 @@ var avatars = {};
 var publicKeys = {};
 var currentReceiver = '';
 var blocker = $('.blocker');
+var error = $('#error');
 var keyName;
+var idling;
 
 var socket = io(body.data('server'));
 var localSocket = io();
 
-var setOnline = function () {
+function setOnline(status) {
   socket.emit('notifications', {
     user: me,
-    avatar: avatars[me]
+    avatar: avatars[me],
+    status: status
   });
-};
+
+  if (status === 'active') {
+    clearInterval(idling);
+    idling = setInterval(function () {
+      console.log('counting down to idle');
+      setOnline('idle');
+    }, 60000 * 3);
+  }
+}
+
+setOnline('active');
 
 var addUser = function (user, p) {
   $.getJSON('https://keybase.io/_/api/1.0/user/lookup.json?usernames=' +
@@ -43,7 +56,7 @@ var addUser = function (user, p) {
     avatars[user] = avatar;
 
     if (user === me) {
-      setOnline();
+      setOnline('active');
     }
   });
 };
@@ -66,7 +79,8 @@ $.getJSON('/users', function (data) {
 
 usersEl.on('click', 'p', function (ev) {
   feed.empty();
-  setOnline();
+  setOnline('active');
+
   var self = $(this);
   var user = $(this).data('user');
   keyName = [me, user].sort().join('-');
@@ -105,7 +119,7 @@ search.on('keyup', function (ev) {
 newMsg.on('submit', function (ev) {
   ev.preventDefault();
 
-  setOnline();
+  setOnline('active');
 
   var isPublic = false;
   if ($('input[name="public"]').is(':checked')) {
@@ -136,7 +150,7 @@ newMsg.on('submit', function (ev) {
 
 localSocket.on('local', function (data) {
   if (feed.find('li[data-created="' + data.created + '"]').length === 0) {
-    console.log('listening to incoming local data ', data)
+    // console.log('listening to incoming local data ', data)
     r.render(data);
   }
 });
@@ -147,10 +161,18 @@ socket.on('notifications', function (data) {
   }
 });
 
-socket.on('online', function (data) {
+socket.on('active', function (data) {
   if (users.indexOf(data.user) > -1) {
     console.log('user is online ', data.user);
-    usersEl.find('p[data-user="' + data.user + '"] .notification').addClass('online');
+    usersEl.find('p[data-user="' + data.user + '"] .notification')
+           .removeClass('idle').addClass('active');
+  }
+});
+
+socket.on('idle', function (data) {
+  if (users.indexOf(data.user) > -1) {
+    usersEl.find('p[data-user="' + data.user + '"] .notification')
+           .removeClass('active').addClass('idle');
   }
 });
 
@@ -161,10 +183,20 @@ localSocket.on('latest-message-id', function (data) {
   });
 });
 
+localSocket.on('err', function (data) {
+  error.find('span').text(data.error);
+  error.find('p').html(data.details);
+  error.fadeIn();
+});
+
+error.click(function () {
+  error.fadeOut();
+});
+
 socket.on('message', function (data) {
   blocker.fadeOut();
   if (feed.find('li[data-created="' + data.created + '"]').length === 0) {
-    console.log('listening to incoming data ', data)
+   // console.log('listening to incoming data ', data)
     if (data.public) {
       r.render(data);
     } else {
