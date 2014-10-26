@@ -34,13 +34,10 @@ function setOnline(status) {
   if (status === 'active') {
     clearInterval(idling);
     idling = setInterval(function () {
-      console.log('counting down to idle');
       setOnline('idle');
     }, 60000 * 3);
   }
 }
-
-setOnline('active');
 
 var addUser = function (user, p) {
   $.getJSON('https://keybase.io/_/api/1.0/user/lookup.json?usernames=' +
@@ -75,6 +72,12 @@ $.getJSON('/users', function (data) {
     p.append(span);
     usersEl.append(p);
   });
+});
+
+newMsg.on('keydown', 'textarea', function (ev) {
+  if (ev.keyCode === 13 && (ev.metaKey || ev.ctrlKey)) {
+    newMsg.submit();
+  }
 });
 
 usersEl.on('click', 'p', function (ev) {
