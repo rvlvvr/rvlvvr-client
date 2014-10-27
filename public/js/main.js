@@ -169,7 +169,7 @@ socket.on('active', function (data) {
   if (users.indexOf(data.user) > -1) {
     console.log('user is online ', data.user);
     usersEl.find('p[data-user="' + data.user + '"] .notification')
-           .removeClass('idle').addClass('active');
+           .removeClass('idle').removeClass('new').addClass('active');
   }
 });
 
@@ -200,7 +200,7 @@ error.click(function () {
 socket.on('message', function (data) {
   blocker.fadeOut();
   if (feed.find('li[data-created="' + data.created + '"]').length === 0) {
-   // console.log('listening to incoming data ', data)
+    console.log('listening to incoming data ', data)
     if (data.public) {
       r.render(data);
     } else {
