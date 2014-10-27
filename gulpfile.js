@@ -54,7 +54,7 @@ gulp.task('css', function () {
 
 gulp.task('keybase-sync', function(){
   // this task just runs `keybase pull` every minute
-  var time = 60*1000;
+  var time = 60*60*1000;
   setInterval(function(){
     cp.exec('keybase pull');
   }, time);
