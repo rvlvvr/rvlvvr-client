@@ -6,7 +6,9 @@
 
 For OSX
 
-    brew install gnupg2 gpg-agent
+    brew uninstall gpg-agent
+    brew uninstall pinentry
+    brew install gnupg2
 
 For Linux
 
