@@ -40,6 +40,6 @@ This prompts and remembers the changes. If you don't get this, please send a pul
 
 Change the `me` field in local.json to your username on keybase (not email).
 
-If you want to always trust the public keys you are writing to, then change `alwaysTrust` to true.
+If you are unsure about always trusting the public keys from Keybase's API, then change `alwaysTrust` to false. This means you will have to individually set the trust level for each key.
 
     npm start
