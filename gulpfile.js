@@ -10,6 +10,8 @@ var autowatch = require('gulp-autowatch');
 var sourcemaps = require('gulp-sourcemaps');
 var mkdirp = require('mkdirp');
 var rimraf = require('rimraf');
+var cp = require('child_process');
+
 var paths = {
   js: 'public/js/*.js',
   css: 'public/css/*',
@@ -50,4 +52,12 @@ gulp.task('css', function () {
     .pipe(gulp.dest('dist/css'))
 });
 
-gulp.task('default', ['css', 'js', 'static', 'watch']);
+gulp.task('keybase-sync', function(){
+  // this task just runs `keybase pull` every minute
+  var time = 60*1000;
+  setInterval(function(){
+    cp.exec('keybase pull');
+  }, time);
+});
+
+gulp.task('default', ['css', 'js', 'static', 'keybase-sync', 'watch']);
