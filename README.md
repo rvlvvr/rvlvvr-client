@@ -1,6 +1,12 @@
 # rvlvvr-client
 
-## setup
+## Setup
+
+### Important note
+
+Before sending pull requests that aren't core fixes to the GPG portion or improvements on existing user interface-related CSS/JS, please talk to Justin or myself. If in doubt, file an issue before sending a pull request so a discussion can be had.
+
+The user interface is mainly a scaffold/starting point and not meant for custom integrations of look and feel - you can freely do this on your own fork and even publish some sort of theme if you wish.
 
 ### Install GPG
 
