@@ -91,6 +91,10 @@ usersEl.on('click', 'p', function (ev) {
   receiver.val(user);
   currentReceiver = user;
   socket.emit('join', keyName);
+  socket.emit('dual', {
+    key: keyName,
+    start: false
+  });
   localSocket.emit('recent', user);
   localSocket.emit('latest-message-id', user);
 
