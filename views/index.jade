@@ -17,8 +17,8 @@ block content
       h3 By default, messages are sent encrypted and set as private.
       h3 If you want everyone to see, check the public option before sending. These will not be encrypted.
     form#new(method='POST')
-      input(type='checkbox', name='public')
-      span make public? (defaults to private)
+      input(type='checkbox', name='public' id='public')
+      label(for='public') make public? (defaults to private)
       textarea(name='message', maxlength='350')
       input(type='hidden', id='receiver')
       input(type='hidden', id='sender-avatar')
