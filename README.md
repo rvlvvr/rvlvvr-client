@@ -33,19 +33,17 @@ If you change your keys or the person you are tracking changes their keys, you w
 
 ### If there is a password on your GPG secret ...
 
-For OSX
+#### For OSX
 
 Install https://gpgtools.org
 
-For Linux
+#### For Linux
 
 This prompts and remembers the changes. If you don't get this, please send a pull request to this file with changes.
 
-For Windows
+#### For Windows
 
 Install http://gpg4win.org
-
-(I don't know the rest or if it is required so somebody send a pull request please and thank you!)
 
 ## GPG troubleshooting
 
