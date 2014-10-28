@@ -35,6 +35,12 @@ For Linux
 
 This prompts and remembers the changes. If you don't get this, please send a pull request to this file with changes.
 
+For Windows
+
+Install http://gpg4win.org
+
+(I don't know the rest or if it is required so somebody send a pull request please and thank you!)
+
 ## GPG troubleshooting
 
 If for some reason you are getting an error on your client server about 'no secret key' while trying to encrypt a message for a user, it might be that they are not using their keybase key but a different GPG one to encrypt a message. In that case they need to set the default to the keybase one. In OSX this can be set in GPG Preferences (search in spotlight). For Linux you can set that with gpg2:
@@ -53,3 +59,7 @@ If you are unsure about always trusting the public keys from Keybase's API, then
 ## Start the server
 
     npm start
+
+## Final note
+
+Since this is in constant development, expect changes to happen on a daily basis. `git pull` often to keep up to date.
