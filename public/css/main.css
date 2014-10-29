@@ -205,6 +205,19 @@ section#public {
   overflow: auto;
 }
 
+.message-state {
+  font-weight: 500;
+  padding-left: 10px;
+}
+
+.message-state.private {
+  color: #e0155d;
+}
+
+.message-state.public {
+  color: #32bc76;
+}
+
 #new {
   display: none;
   padding: 10px;

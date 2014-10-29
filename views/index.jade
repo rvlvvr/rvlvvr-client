@@ -19,6 +19,7 @@ block content
     form#new(method='POST')
       input(type='checkbox', name='public' id='public')
       label(for='public') make public? (defaults to private)
+      span.message-state.private PRIVATE
       textarea(name='message', maxlength='350')
       input(type='hidden', id='receiver')
       input(type='hidden', id='sender-avatar')

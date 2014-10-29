@@ -18,6 +18,8 @@ var publicKeys = {};
 var currentReceiver = '';
 var blocker = $('.blocker');
 var error = $('#error');
+var publicCheck = $('#public');
+var messageState = $('.message-state');
 var keyName;
 var idling;
 
@@ -57,6 +59,16 @@ var addUser = function (user, p) {
     }
   });
 };
+
+publicCheck.on('click', function () {
+  if ($(this)[0].checked) {
+    messageState.removeClass('private').addClass('public');
+    messageState.text('PUBLIC');
+  } else {
+    messageState.removeClass('public').addClass('private');
+    messageState.text('PRIVATE');
+  }
+});
 
 $.getJSON('/users', function (data) {
   data.users.sort();
@@ -151,6 +163,8 @@ newMsg.on('submit', function (ev) {
       public: isPublic
     }));
 
+    publicCheck[0].checked = false;
+    messageState.removeClass('public').addClass('private');
     newMsg.find('textarea').val('');
   }, 500);
 });
