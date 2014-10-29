@@ -20,7 +20,7 @@
     "socket.io-client": "^1.1.0",
     "webremix": "~1.0.0",
     "jquery": "~2.1.1",
-    "meatspace-publico": "~2.0.1",
+    "meatspace-publico": "~2.0.2",
     "moment": "~2.8.3",
     "nodemon": "~1.2.1"
   },
