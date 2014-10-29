@@ -156,10 +156,7 @@ newMsg.on('submit', function (ev) {
 });
 
 localSocket.on('local', function (data) {
-  if (feed.find('li[data-created="' + data.created + '"]').length === 0) {
-    // console.log('listening to incoming local data ', data)
-    r.render(data);
-  }
+  r.render(data);
 });
 
 socket.on('notifications', function (data) {
@@ -201,14 +198,18 @@ error.click(function () {
   error.fadeOut();
 });
 
+socket.emit('feed');
+
+socket.on('feed', function (data) {
+  r.render(data, true);
+});
+
 socket.on('message', function (data) {
   blocker.fadeOut();
-  if (feed.find('li[data-created="' + data.created + '"]').length === 0) {
-    console.log('listening to incoming data ', data)
-    if (data.public) {
-      r.render(data);
-    } else {
-      localSocket.emit('decrypt', data);
-    }
+
+  if (data.public) {
+    r.render(data, data.public);
+  } else {
+    localSocket.emit('decrypt', data);
   }
 });
