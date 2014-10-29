@@ -156,6 +156,7 @@ newMsg.on('submit', function (ev) {
 });
 
 localSocket.on('local', function (data) {
+  console.log('rendering local ', data)
   r.render(data);
 });
 
@@ -182,6 +183,7 @@ socket.on('idle', function (data) {
 });
 
 localSocket.on('latest-message-id', function (data) {
+  console.log('since id ', data)
   socket.emit('dual', {
     key: keyName,
     start: data
