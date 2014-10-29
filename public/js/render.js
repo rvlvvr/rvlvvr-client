@@ -60,11 +60,11 @@ exports.render = function (data, publicOnly) {
       publicFeed.prepend(message);
       truncateMessages(publicFeed.find('li'));
     }
-  } else {
-    if (feed.find('li[data-created="' + data.created + '"]').length === 0) {
-      feed.prepend(li);
-      truncateMessages(feed.find('li'));
-    }
+  }
+
+  if (feed.find('li[data-created="' + data.created + '"]').length === 0) {
+    feed.prepend(li);
+    truncateMessages(feed.find('li'));
   }
 
 };
