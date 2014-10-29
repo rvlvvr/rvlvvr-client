@@ -163,8 +163,6 @@ newMsg.on('submit', function (ev) {
       public: isPublic
     }));
 
-    publicCheck[0].checked = false;
-    messageState.removeClass('public').addClass('private');
     newMsg.find('textarea').val('');
   }, 500);
 });
