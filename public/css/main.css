@@ -249,8 +249,8 @@ section#public {
   background-color: #fff;
   border-bottom: 1px solid #eee;
   position: relative;
-  width: 95%;
-  padding: 8px 5px;
+  width: 100%;
+  padding: 8px 0;
   float: left;
 }
 
@@ -270,12 +270,12 @@ section#public {
   font-size: 1.2rem;
   line-height: 1.4rem;
   min-height: 60px;
-  margin-left: 90px;
+  margin-left: 85px;
   overflow-x: hidden;
   overflow-y: auto;
   max-height: 600px;
   padding-bottom: 20px;
-  padding-right: 10px;
+  padding-right: 5px;
 }
 
 #feed li.empty {
@@ -330,7 +330,7 @@ section#public {
   color: #888;
   bottom: 0;
   font-size: 0.9rem;
-  padding: 5px 2px;
+  padding: 5px;
   position: absolute;
   right: 0;
 }
