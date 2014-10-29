@@ -106,7 +106,7 @@ section#users, section#messages, #search {
 }
 
 .info {
-  padding: 70px 20px 20px 20px;
+  padding: 20px;
 }
 
 .loading {
@@ -167,10 +167,13 @@ section#users p span {
 }
 
 section#messages {
-  position: relative;
+  position: fixed;
   width: 550px;
-  padding-left: 190px;
-  height: 100%;
+  left: 190px;
+  top: 0;
+  padding-top: 50px;
+  bottom: 0;
+  overflow: auto;
 }
 
 section#messages .subheader h1, section#messages .subheader h2 {
@@ -185,7 +188,7 @@ section#messages .subheader h1 {
 }
 
 section#messages .subheader h2 {
-  left: 575px;
+  left: 545px;
   padding-left: 10px;
   position: absolute;
   border-left: 5px solid #111;
@@ -196,7 +199,7 @@ section#public {
   border-left: 5px solid #111;
   position: fixed;
   width: 550px;
-  left: 770px;
+  left: 740px;
   top: 44px;
   bottom: 0;
   overflow: auto;
@@ -204,10 +207,9 @@ section#public {
 
 #new {
   display: none;
-  padding: 10px 15px 5px 15px;
-  width: 100%;
+  padding: 10px;
+  width: 90%;
   position: relative;
-  margin-top: 45px;
 }
 
 #new textarea {
