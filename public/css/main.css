@@ -170,8 +170,7 @@ section#messages {
   position: fixed;
   width: 550px;
   left: 190px;
-  top: 0;
-  padding-top: 50px;
+  top: 45px;
   bottom: 0;
   overflow: auto;
 }
