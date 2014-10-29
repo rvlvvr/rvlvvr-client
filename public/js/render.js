@@ -20,7 +20,7 @@ exports.render = function (data, publicOnly) {
   }
 
   var li = $('<li data-created="' + data.created + '" class="' + isPublic + '"><div class="avatars"></div></li>');
-  var senderAvatar = $('<div><img src="' + data.senderAvatar + '"></img></div>');
+  var senderAvatar = $('<div class="sender"><img src="' + data.senderAvatar + '"></img></div>');
   var div = $('<div class="para"></div>');
   var small;
 
@@ -47,7 +47,17 @@ exports.render = function (data, publicOnly) {
 
   if (publicOnly) {
     if (publicFeed.find('li[data-created="' + data.created + '"]').length === 0) {
-      publicFeed.prepend(li.clone());
+      var message = li.clone();
+      var senderLabel = $('<span class="label">' + data.sender + '</span>');
+      message.find('.sender').append(senderLabel);
+      if (data.sender !== data.receiver) {
+        var recipient = $('<div class="recipient"></div>');
+        var receiverAvatar = $('<img src="' + data.receiverAvatar + '"></img>');
+        var receiverLabel = $('<span class="label">' + data.receiver + '</span>');
+        recipient.append(receiverAvatar).append(receiverLabel);
+        message.find('.avatars').append(recipient);
+      }
+      publicFeed.prepend(message);
       truncateMessages(publicFeed.find('li'));
     }
   } else {

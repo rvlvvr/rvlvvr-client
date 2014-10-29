@@ -288,16 +288,35 @@ section#public {
 
 #feed li .avatars, #public-feed li .avatars {
   float: left;
-  height: 40px;
+  height: 70px;
   width: 80px;
   position: relative;
 }
 
+#public-feed li .label {
+  background-color: rgba(255, 255, 255, 0.8);
+  color: #111;
+  font-size: 0.6rem;
+  line-height: 0.6rem;
+  padding: 2px 5px;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  z-index: 2;
+}
+
 #feed li .avatars div, #public-feed li .avatars div {
-  height: 70px;
   width: 80px;
   overflow: hidden;
   position: relative;
+}
+
+#feed li .avatars div {
+  height: 70px;
+}
+
+#public-feed li .avatars div {
+  height: 35px;
 }
 
 #feed .image-wrapper, #public-feed .image-wrapper {
