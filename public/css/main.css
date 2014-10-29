@@ -457,3 +457,7 @@ button[type="submit"] {
   background-color: #111;
   color: #eee;
 }
+
+time.hidden {
+  display: none;
+}
