@@ -12,13 +12,6 @@ var sortItems = function (a, b) {
   return ($(b).data('created')) > ($(a).data('created')) ? 1 : -1;
 };
 
-var updateTime = function (li) {
-  //  times[0] is the created time (not displayed)
-  //  times[1] is the difference between then and now
-  var times = li.find('time');
-  times[1].text(moment.unix(times[0].text).fromNow());
-};
-
 var interval = null;
 
 exports.render = function (data, publicOnly, currentReceiver) {
@@ -41,10 +34,6 @@ exports.render = function (data, publicOnly, currentReceiver) {
   div.html(data.html);
 
   li.find('.avatars').append(senderAvatar);
-
-  var createdTimeEl = $('<time class="hidden"></time>');
-  createdTimeEl.text(moment.unix(data.created));
-  li.append(createdTimeEl);
 
   var timeEl = $('<time></time>');
   timeEl.text(moment.unix(data.created).fromNow());
@@ -80,15 +69,17 @@ exports.render = function (data, publicOnly, currentReceiver) {
     }
   }
 
+  var updateTime = function (li) {
+    var timeEl = li.find('time')[0];
+    var created = li.attr('data-created');
+    timeEl.datetime = moment.unix(created).fromNow();
+  };
+
   if (!interval) {
     interval = setInterval(function() {
-      alert('updating times...');
-      for (var li of feed.find('li')) {
-        updateTime(li);
-      }
-      for (var li of publicFeed.find('li')) {
-        updateTime(li);
-      }
+      publicFeed.find('li').each(function(i) {
+        updateTime($(this));
+      });
     }, 2000);
   }
 };
