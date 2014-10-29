@@ -1,3 +1,5 @@
+var MAX_LIMIT = 30;
+
 var $ = require('jquery');
 var moment = require('moment');
 
@@ -37,14 +39,22 @@ exports.render = function (data, publicOnly) {
 
   li.append(div);
 
+  var truncateMessages = function(elements) {
+    if (elements.length > MAX_LIMIT) {
+      elements.slice(MAX_LIMIT, elements.length).remove();
+    };
+  }
 
   if (publicOnly) {
     if (publicFeed.find('li[data-created="' + data.created + '"]').length === 0) {
       publicFeed.prepend(li.clone());
+      truncateMessages(publicFeed.find('li'));
     }
   } else {
     if (feed.find('li[data-created="' + data.created + '"]').length === 0) {
       feed.prepend(li);
+      truncateMessages(feed.find('li'));
     }
   }
+
 };
