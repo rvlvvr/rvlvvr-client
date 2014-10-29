@@ -169,7 +169,7 @@ newMsg.on('submit', function (ev) {
 
 localSocket.on('local', function (data) {
   console.log('rendering local ', data)
-  r.render(data);
+  r.render(data, false, currentReceiver);
 });
 
 socket.on('notifications', function (data) {
@@ -222,7 +222,7 @@ socket.on('message', function (data) {
   blocker.fadeOut();
 
   if (data.public) {
-    r.render(data, data.public);
+    r.render(data, false, currentReceiver);
   } else {
     localSocket.emit('decrypt', data);
   }

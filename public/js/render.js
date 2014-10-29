@@ -12,7 +12,7 @@ var sortItems = function (a, b) {
   return ($(b).data('created')) > ($(a).data('created')) ? 1 : -1;
 };
 
-exports.render = function (data, publicOnly) {
+exports.render = function (data, publicOnly, currentReceiver) {
   var isPublic = 'public';
 
   if (data.public.toString() === 'false') {
@@ -60,11 +60,10 @@ exports.render = function (data, publicOnly) {
       publicFeed.prepend(message);
       truncateMessages(publicFeed.find('li'));
     }
+  } else {
+    if (currentReceiver && feed.find('li[data-created="' + data.created + '"]').length === 0) {
+      feed.prepend(li);
+      truncateMessages(feed.find('li'));
+    }
   }
-
-  if (feed.find('li[data-created="' + data.created + '"]').length === 0) {
-    feed.prepend(li);
-    truncateMessages(feed.find('li'));
-  }
-
 };
