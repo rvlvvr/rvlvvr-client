@@ -142,6 +142,7 @@ section#users {
   bottom: 0;
   overflow: auto;
   top: 75px;
+  z-index: 5;
 }
 
 section#users p {

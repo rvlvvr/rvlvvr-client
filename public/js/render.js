@@ -42,9 +42,9 @@ exports.render = function (data, publicOnly) {
     if (publicFeed.find('li[data-created="' + data.created + '"]').length === 0) {
       publicFeed.prepend(li.clone());
     }
-  }
-
-  if (feed.find('li[data-created="' + data.created + '"]').length === 0) {
-    feed.prepend(li);
+  } else {
+    if (feed.find('li[data-created="' + data.created + '"]').length === 0) {
+      feed.prepend(li);
+    }
   }
 };
