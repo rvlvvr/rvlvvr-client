@@ -223,7 +223,7 @@ socket.on('message', function (data) {
 
   if (data.public) {
     r.render(data, false, currentReceiver);
-  } else {
-    localSocket.emit('decrypt', data);
   }
+
+  localSocket.emit('decrypt', data);
 });
