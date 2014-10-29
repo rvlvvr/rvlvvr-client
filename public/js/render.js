@@ -12,7 +12,7 @@ var sortItems = function (a, b) {
   return ($(b).data('created')) > ($(a).data('created')) ? 1 : -1;
 };
 
-var interval = null;
+var updateInterval = null;
 
 exports.render = function (data, publicOnly, currentReceiver) {
   var isPublic = 'public';
@@ -67,17 +67,23 @@ exports.render = function (data, publicOnly, currentReceiver) {
     truncateMessages(feed.find('li'));
   }
 
-  var updateTime = function (li) {
-    var timeEl = li.find('time')[0];
-    var created = li.attr('data-created');
-    timeEl.datetime = moment.unix(created).fromNow();
-  };
+  if (!updateInterval) {
+    var updateTime = function (li) {
+      var originalTimeEl = li.find('time')[0];
+      originalTimeEl.remove();
+      var dataCreated = li.attr('data-created');
+      var timeEl = $('<time></time>');
+      timeEl.text(moment.unix(dataCreated).fromNow());
+      li.append(timeEl);
+    };
 
-  if (!interval) {
-    interval = setInterval(function() {
+    updateInterval = setInterval(function() {
+      feed.find('li').each(function(i) {
+        updateTime($(this));
+      });
       publicFeed.find('li').each(function(i) {
         updateTime($(this));
       });
-    }, 2000);
+    }, 60000);
   }
 };
