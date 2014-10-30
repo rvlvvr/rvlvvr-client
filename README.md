@@ -22,8 +22,8 @@ For Linux
 
 ### Install keybase
 
-    npm install -g keybase-installer
-    keybase-installer
+    npm install -g keybase-installer (you may need to run as root, sudo npm install -g keybase-installer)
+    keybase-installer (you may need to run as root, sudo keybase-installer)
     keybase login
     keybase pull
 
