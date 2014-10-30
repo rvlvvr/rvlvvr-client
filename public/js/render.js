@@ -12,6 +12,8 @@ var sortItems = function (a, b) {
   return ($(b).data('created')) > ($(a).data('created')) ? 1 : -1;
 };
 
+var updateInterval = null;
+
 exports.render = function (data, publicOnly, currentReceiver) {
   var isPublic = 'public';
 
@@ -63,5 +65,25 @@ exports.render = function (data, publicOnly, currentReceiver) {
   } else if (currentReceiver && feed.find('li[data-created="' + data.created + '"]').length === 0) {
     feed.prepend(li);
     truncateMessages(feed.find('li'));
+  }
+
+  if (!updateInterval) {
+    var updateTime = function (li) {
+      var originalTimeEl = li.find('time')[0];
+      originalTimeEl.remove();
+      var dataCreated = li.attr('data-created');
+      var timeEl = $('<time></time>');
+      timeEl.text(moment.unix(dataCreated).fromNow());
+      li.append(timeEl);
+    };
+
+    updateInterval = setInterval(function() {
+      feed.find('li').each(function(i) {
+        updateTime($(this));
+      });
+      publicFeed.find('li').each(function(i) {
+        updateTime($(this));
+      });
+    }, 60000);
   }
 };
