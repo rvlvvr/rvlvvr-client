@@ -8,23 +8,25 @@
     "npm": "1.4.x"
   },
   "scripts": {
-    "start": "keybase pull & gulp & nodemon index.js"
+    "start": "keybase pull & gulp & nodemon index.js",
+    "test": "mocha lib --recursive",
+    "coverage": "node_modules/.bin/istanbul cover  -x '**/*_test.js' ./node_modules/.bin/_mocha -- --recursive lib --"
   },
   "dependencies": {
     "browserify": "^5.9.3",
     "hapi": "~7.1.1",
     "jade": "~1.5.0",
-    "moment": "^2.8.3",
+    "moment": "~2.8.3",
     "nconf": "~0.6.9",
     "socket.io": "^1.1.0",
     "socket.io-client": "^1.1.0",
     "webremix": "~1.0.0",
     "jquery": "~2.1.1",
     "meatspace-publico": "~2.0.2",
-    "moment": "~2.8.3",
     "nodemon": "~1.2.1"
   },
   "devDependencies": {
+    "chai": "^1.9.2",
     "gulp": "^3.8.7",
     "gulp-autowatch": "0.0.1",
     "gulp-cached": "^1.0.1",
@@ -33,7 +35,10 @@
     "gulp-match": "^0.2.0",
     "gulp-sourcemaps": "^1.1.1",
     "gulp-uglify": "^0.3.1",
+    "istanbul": "^0.3.2",
     "mkdirp": "^0.5.0",
+    "mocha": "^2.0.1",
+    "mocha-istanbul": "^0.2.0",
     "rimraf": "^2.2.8",
     "vinyl-buffer": "0.0.0",
     "vinyl-source-stream": "^0.1.1"

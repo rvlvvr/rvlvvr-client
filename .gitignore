@@ -3,3 +3,4 @@ node_modules
 local.json
 dist
 npm-debug.log
+coverage
