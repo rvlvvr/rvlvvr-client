@@ -347,6 +347,10 @@ section#public {
   right: 0;
 }
 
+#feed img, #public-feed img {
+  max-width: 520px;
+}
+
 #error {
   opacity: 0.95;
   display: none;
