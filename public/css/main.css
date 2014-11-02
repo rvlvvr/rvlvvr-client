@@ -266,7 +266,7 @@ section#public {
   float: left;
 }
 
-#feed .para iframe {
+.para iframe {
   width: 450px;
   height: 253px;
 }
