@@ -8,13 +8,9 @@ var me = body.data('me');
 var feed = $('#feed');
 var publicFeed = $('#public-feed');
 
-var sortItems = function (a, b) {
-  return ($(b).data('created')) > ($(a).data('created')) ? 1 : -1;
-};
-
 var updateInterval = null;
 
-exports.render = function (data, publicOnly, currentReceiver) {
+exports.render = function (data, publicOnly, currentReceiver, initialLoad) {
   var isPublic = 'public';
 
   if (data.public.toString() === 'false') {
@@ -64,6 +60,13 @@ exports.render = function (data, publicOnly, currentReceiver) {
     }
   } else if (currentReceiver && feed.find('li[data-created="' + data.created + '"]').length === 0) {
     feed.prepend(li);
+
+    if (initialLoad) {
+      feed.find('li').sort(function (a, b) {
+        return $(a).data('created') < $(b).data('created');
+      }).appendTo(feed);
+    }
+
     truncateMessages(feed.find('li'));
   }
 

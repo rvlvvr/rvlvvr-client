@@ -266,6 +266,11 @@ section#public {
   float: left;
 }
 
+#feed .para iframe {
+  width: 450px;
+  height: 253px;
+}
+
 #feed li.private .lock {
   background-color: #fff;
   color: #777;

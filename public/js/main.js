@@ -168,8 +168,13 @@ newMsg.on('submit', function (ev) {
 });
 
 localSocket.on('local', function (data) {
-  console.log('rendering local ', data)
   r.render(data, false, currentReceiver);
+});
+
+localSocket.on('localall', function (data) {
+  data.forEach(function (d) {
+    r.render(d.value.message, false, currentReceiver, true);
+  });
 });
 
 socket.on('notifications', function (data) {
