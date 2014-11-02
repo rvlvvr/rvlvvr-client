@@ -10,6 +10,7 @@
   "scripts": {
     "start": "keybase pull & gulp & nodemon index.js",
     "test": "mocha lib --recursive",
+    "gen-integration-keys": "gpg --batch --gen-key test/gpg_batch_key_generation.txt",
     "coverage": "node_modules/.bin/istanbul cover  -x '**/*_test.js' ./node_modules/.bin/_mocha -- --recursive lib --"
   },
   "dependencies": {
