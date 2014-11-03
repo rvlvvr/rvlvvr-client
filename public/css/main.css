@@ -6,7 +6,6 @@ body, html, body > * {
 body {
   font-family: Roboto, sans-serif;
   font-weight: 200;
-
 }
 
 .wrapper {
@@ -521,6 +520,10 @@ button[type="submit"] {
   .blocker p {
     font-size: 2rem;
     line-height: 2.5rem;
+  }
+
+  #feed li .avatars img, #public-feed li .avatars img {
+    max-width: 250px;
   }
 
   section#messages .subheader h2 {
