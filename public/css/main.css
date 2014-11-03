@@ -522,7 +522,7 @@ button[type="submit"] {
     line-height: 2.5rem;
   }
 
-  #feed li .avatars img, #public-feed li .avatars img {
+  #feed img, #public-feed img {
     max-width: 250px;
   }
 
