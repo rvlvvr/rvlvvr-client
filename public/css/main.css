@@ -535,4 +535,8 @@ button[type="submit"] {
     width: 98%;
     height: 60px;
   }
+
+  #feed time, #public-feed time {
+    font-size: 0.8rem;
+  }
 }
