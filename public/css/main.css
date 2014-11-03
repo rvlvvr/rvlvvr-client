@@ -466,3 +466,73 @@ button[type="submit"] {
   background-color: #111;
   color: #eee;
 }
+
+@media only screen and (max-width: 1295px) {
+  .wrapper {
+    width: 842px;
+  }
+
+  section#messages, section#public {
+    width: 320px;
+  }
+
+  #feed li .avatars img, #public-feed li .avatars img,
+  #public-feed li .avatars div, #feed li .avatars div {
+    width: 50px;
+  }
+
+  #public-feed li .avatars span {
+    display: none;
+  }
+
+  .para iframe {
+    width: 250px;
+    height: 140px;
+  }
+
+  #feed li .para, #public-feed li .para {
+    margin-left: 55px;
+    font-size: 1rem;
+    line-height: 1.2rem;
+  }
+
+  #feed li .avatars, #public-feed li .avatars {
+    width: 50px;
+  }
+
+  section#public {
+    left: 510px;
+  }
+
+  #feed li.private .lock {
+
+  }
+
+  .info h2 {
+    font-size: 2rem;
+  }
+
+  .info h3 {
+    margin-top: 10px;
+    font-size: 1.3rem;
+    line-height: 1.5rem;
+  }
+
+  .blocker p {
+    font-size: 2rem;
+    line-height: 2.5rem;
+  }
+
+  section#messages .subheader h2 {
+    left: 315px;
+  }
+
+  #new {
+    margin-bottom: 20px;
+  }
+
+  #new textarea {
+    width: 98%;
+    height: 60px;
+  }
+}

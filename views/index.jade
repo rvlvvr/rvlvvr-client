@@ -18,7 +18,7 @@ block content
       h3 If you want everyone to see, check the public option before sending. These will not be encrypted.
     form#new(method='POST')
       input(type='checkbox', name='public' id='public')
-      label(for='public') make public? (defaults to private)
+      label(for='public') make public?
       span.message-state.private PRIVATE
       textarea(name='message', maxlength='350')
       input(type='hidden', id='receiver')

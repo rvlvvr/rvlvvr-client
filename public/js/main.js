@@ -70,6 +70,11 @@ publicCheck.on('click', function () {
   }
 });
 
+if (publicCheck[0].checked) {
+  messageState.removeClass('private').addClass('public');
+  messageState.text('PUBLIC');
+}
+
 $.getJSON('/users', function (data) {
   data.users.sort();
   loading.remove();
