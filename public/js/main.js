@@ -192,15 +192,21 @@ socket.on('notifications', function (data) {
 socket.on('active', function (data) {
   if (users.indexOf(data.user) > -1) {
     console.log('user is online ', data.user);
-    usersEl.find('p[data-user="' + data.user + '"] .notification')
-           .removeClass('idle').removeClass('new').addClass('active');
+    var userEl = usersEl.find('p[data-user="' + data.user + '"]');
+    userEl.find('.notification').removeClass('idle').removeClass('new').addClass('active');
+    if (data.user !== me) {
+      userEl.detach().insertAfter(usersEl.find('p[data-user="' + me + '"]'));
+    }
   }
 });
 
 socket.on('idle', function (data) {
   if (users.indexOf(data.user) > -1) {
-    usersEl.find('p[data-user="' + data.user + '"] .notification')
-           .removeClass('active').addClass('idle');
+    var userEl = usersEl.find('p[data-user="' + data.user + '"]');
+    userEl.find('.notification').removeClass('active').addClass('idle');
+    if (data.user !== me) {
+      userEl.detach().insertAfter(usersEl.find('p[data-user="' + me + '"]'));
+    }
   }
 });
 
