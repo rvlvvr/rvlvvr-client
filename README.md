@@ -36,7 +36,7 @@ If you change your keys or the person you are tracking changes their keys, you w
 
 Install https://gpgtools.org
 
-If you already had a password set with GPG and gpg-agent running, you'll need to reset it for the prompt to work. Do a spotlight search for GPGPrefernces and click on 'Delete stored passphrases' and also set the Default key to your keybase.io one.
+If you already had a password set with GPG and gpg-agent running, you'll need to reset it for the prompt to work. Do a spotlight search for GPGPreferences and click on 'Delete stored passphrases' and also set the Default key to your keybase.io one.
 
 #### For Linux
 
