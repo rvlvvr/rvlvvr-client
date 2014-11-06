@@ -80,7 +80,9 @@ There will be three columns: Search, Welcome, and Public Feed.
 
 To chat in the public feed, select your own name from the first column and check the "make public?" box at the top of the second column. Any messages will then be visible on the public feed of the server.
 
-To chat directly with a person, you can select their name from the first column. If the "make public?" box is unchecked, the message will be sent privately to them.
+To chat with others in the public feed, select their name from the first column and check the "make public?" box at the top of the second column. Any messages will be directed to them on the public feed of the server.
+
+To chat privately with a person, you can select their name from the first column. If the "make public?" box is **unchecked**, the message will be sent privately to them.
 
 ## Final note
 
