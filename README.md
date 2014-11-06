@@ -65,6 +65,23 @@ If you are unsure about always trusting the public keys from Keybase's API, then
 
     npm start
 
+## Send Messages
+
+Once you start the client server, you will see the normal startup messages and then this line:
+
+    Server started: visit http://localhost:3000 in your browser
+
+When you see this you can open a browser to [http://localhost:3000](http://localhost:3000). 
+
+There will be three columns: Search, Welcome, and Public Feed. 
+* The search column will people you are tracking in your keychain including yourself.
+* The welcome column contains basic instructions and will turn into your chat window once you select a person to chat with.
+* The public feed column contains the visible public chat from the server.
+
+To chat in the public feed, select your own name from the first column and check the "make public?" box at the top of the second column. Any messages will then be visible on the public feed of the server.
+
+To chat directly with a person, you can select their name from the first column. If the "make public?" box is unchecked, the message will be sent privately to them.
+
 ## Final note
 
 Since this is in constant development, expect changes to happen on a daily basis. `git pull` often to keep up to date.
