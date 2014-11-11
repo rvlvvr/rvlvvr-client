@@ -49,5 +49,24 @@
     "url": "git://github.com/rvlvvr/rvlvvr-client.git"
   },
   "author": "Edna Piranha <jen@ednapiranha.com> (http://ednapiranha.com)",
-  "license": "BSD"
+  "license": "BSD",
+  "jshintConfig": {
+    "eqeqeq": true,
+    "latedef": true,
+    "noarg": true,
+    "nonew": true,
+    "quotmark": false,
+    "undef": true,
+    "unused": true,
+    "trailing": true,
+    "node": true,
+    "browser": true,
+    "laxcomma": true,
+    "curly": true,
+    "devel": true,
+    "globals": {
+      "exports": true,
+      "require": true
+    }
+  }
 }

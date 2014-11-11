@@ -1,5 +1,5 @@
+/*global io*/
 var $ = require('jquery');
-var moment = require('moment');
 var r = require('./render');
 var body = $('body');
 var me = body.data('me');
@@ -97,7 +97,7 @@ newMsg.on('keydown', 'textarea', function (ev) {
   }
 });
 
-usersEl.on('click', 'p', function (ev) {
+usersEl.on('click', 'p', function () {
   feed.empty();
   setOnline('active');
 
@@ -211,7 +211,7 @@ socket.on('idle', function (data) {
 });
 
 localSocket.on('latest-message-id', function (data) {
-  console.log('since id ', data)
+  console.log('since id ', data);
   socket.emit('dual', {
     key: keyName,
     start: data
