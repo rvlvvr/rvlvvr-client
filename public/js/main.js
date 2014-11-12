@@ -1,6 +1,7 @@
+/*global io*/
 var $ = require('jquery');
-var moment = require('moment');
 var r = require('./render');
+var tinycon = require('./lib/tinycon').tinycon;
 var body = $('body');
 var me = body.data('me');
 var usersEl = $('#users');
@@ -25,6 +26,12 @@ var idling;
 
 var socket = io(body.data('server'));
 var localSocket = io();
+
+tinycon.setOptions({
+  width: 7,
+  height: 9,
+  fallback: true
+});
 
 function setOnline(status) {
   socket.emit('notifications', {
@@ -97,9 +104,10 @@ newMsg.on('keydown', 'textarea', function (ev) {
   }
 });
 
-usersEl.on('click', 'p', function (ev) {
+usersEl.on('click', 'p', function () {
   feed.empty();
   setOnline('active');
+  tinycon.setBubble();
 
   var self = $(this);
   var user = $(this).data('user');
@@ -125,6 +133,10 @@ usersEl.on('click', 'p', function (ev) {
     newMsg.show();
     subheader.show();
   });
+});
+
+body.on('focus', function(){
+  tinycon.setBubble();
 });
 
 search.on('keyup', function (ev) {
@@ -184,6 +196,7 @@ localSocket.on('localall', function (data) {
 
 socket.on('notifications', function (data) {
   if (data && currentReceiver !== data) {
+    tinycon.setBubble(' ');
     usersEl.find('p[data-user="' + data + '"] .notification')
            .removeClass('idle').removeClass('active').addClass('new');
   }
@@ -211,7 +224,7 @@ socket.on('idle', function (data) {
 });
 
 localSocket.on('latest-message-id', function (data) {
-  console.log('since id ', data)
+  console.log('since id ', data);
   socket.emit('dual', {
     key: keyName,
     start: data
