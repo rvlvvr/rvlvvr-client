@@ -28,8 +28,10 @@ var socket = io(body.data('server'));
 var localSocket = io();
 
 tinycon.setOptions({
-  width: 7,
-  height: 9,
+  width: 16,
+  height: 16,
+  colour: '#eeeeee',
+  background: '#111111',
   fallback: true
 });
 
@@ -108,6 +110,7 @@ usersEl.on('click', 'p', function () {
   feed.empty();
   setOnline('active');
   tinycon.setBubble();
+  clearInterval(faviconNotify);
 
   var self = $(this);
   var user = $(this).data('user');
@@ -137,6 +140,7 @@ usersEl.on('click', 'p', function () {
 
 body.on('focus', function(){
   tinycon.setBubble();
+  clearInterval(faviconNotify);
 });
 
 search.on('keyup', function (ev) {
@@ -194,9 +198,20 @@ localSocket.on('localall', function (data) {
   });
 });
 
+var faviconNotify;
+
 socket.on('notifications', function (data) {
   if (data && currentReceiver !== data) {
-    tinycon.setBubble(' ');
+    var on = true;
+    faviconNotify = setInterval(function () {
+      if (on) {
+        tinycon.setBubble(' ');
+        on = false;
+      } else {
+        tinycon.setBubble();
+        on = true;
+      }
+    }, 500);
     usersEl.find('p[data-user="' + data + '"] .notification')
            .removeClass('idle').removeClass('active').addClass('new');
   }
